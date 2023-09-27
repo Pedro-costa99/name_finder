@@ -1,11 +1,18 @@
 import { Button, Chip, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
 import React, { useState } from 'react'
+import './styles.css';
+import SVGBackground from './SVGBackground.tsx';
+import { renderToString } from 'react-dom/server';
+
+
 
 interface DataItem {
   names: string[]
 }
 
-function Home (){
+const Home = () =>{
+
+  const svgString = renderToString(<SVGBackground />);
     const [usage, setUsage] = useState<string>('');
     const [data, setData] = useState<DataItem | null>(null)
     const [gender, setGender] = useState('')
@@ -28,16 +35,12 @@ function Home (){
           .catch(error => console.log(error));
       }
 
-      console.log('data', data)
-
       const handleGenderChange = (value: string) => {
         setGender(value);
-        console.log("Gender selected:", value)
       };
     
       const handleNumberChange = (value: string) => {
         setNumber(value);
-        console.log("Number selected:", value)
       };
 
       const handleChange = (event: SelectChangeEvent<typeof usage>) => {
@@ -47,7 +50,7 @@ function Home (){
         setUsage(value);
       };
 
-      const ITEM_HEIGHT = 48;
+      const ITEM_HEIGHT = 24;
       const ITEM_PADDING_TOP = 8;
 
       const MenuProps = {
@@ -59,98 +62,94 @@ function Home (){
         },
       };
 
+      const genders = [
+        { label: 'Female', value: 'F' },
+        { label: 'Male', value: 'M' },
+      ];
+
       const isSearchDisabled = !(gender && number)
+
+      
     
       return (
-        <>
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', height: '100vh' }}>
-            <h1>Encontre o nome perfeito para seu bebê...</h1>
-            <Grid container spacing={2} style={{ maxWidth: "80%"}}>
-                <Grid item xs={6} container justifyContent="center">
-                    <Chip
-                    label="Female"
-                    color={gender === "F" ? "primary" : "default"}
-                    onClick={() => handleGenderChange("F")}
-                    style={{ marginRight: "8px" }}
-                    />
-                    <Chip
-                    label="Male"
-                    color={gender === "M" ? "primary" : "default"}
-                    onClick={() => handleGenderChange("M")}
-                    />
-                </Grid>
-                <Grid item xs={6} container justifyContent="center">
-                    <Chip
-                    label="1"
-                    color={number === "1" ? "primary" : "default"}
-                    onClick={() => handleNumberChange("1")}
-                    style={{ marginRight: "8px" }}
-                    />
-                    <Chip
-                    label="2"
-                    color={number === "2" ? "primary" : "default"}
-                    onClick={() => handleNumberChange("2")}
-                    style={{ marginRight: "8px" }}
-                    />
-                    <Chip
-                    label="3"
-                    color={number === "3" ? "primary" : "default"}
-                    onClick={() => handleNumberChange("3")}
-                    style={{ marginRight: "8px" }}
-                    />
-                    <Chip
-                    label="4"
-                    color={number === "4" ? "primary" : "default"}
-                    onClick={() => handleNumberChange("4")}
-                    style={{ marginRight: "8px" }}
-                    />
-                    <Chip
-                    label="5"
-                    color={number === "5" ? "primary" : "default"}
-                    onClick={() => handleNumberChange("5")}
-                    style={{ marginRight: "8px" }}
-                    />
-                    <Chip
-                    label="6"
-                    color={number === "6" ? "primary" : "default"}
-                    onClick={() => handleNumberChange("6")}
-                    />
-                </Grid>
-            </Grid>
-            <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Name</InputLabel>
-        <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          value={usage}
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-          MenuProps={MenuProps}
-        >
-          {Object.keys(namesSelect).map((name) => (
-            <MenuItem 
-              key={name}
-              value={name}
+      
+                 <Grid container
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={2}
+                  sx={{ minHeight: '100vh',  backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(svgString)}")`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'}}
             >
-              {namesSelect[name]}
-            </MenuItem>
-           ))}
-        </Select>
-      </FormControl>
-    </div>
-            <div>
-            <Button variant="outlined" onClick={handleSearchClick} disabled={isSearchDisabled}>Pesquisar</Button>
-            {data && (
-                <ul>
-                {data?.names.map((name) => (
-                    <li key={name}>{name}</li>
-                ))}
-                </ul>
-            )}
-            </div>
-            </div>
-        </>
+                  <Grid  sx={{ p: 2, textAlign: 'center' }}>
+                    <h1>Encontre o nome perfeito para seu bebê...</h1>
+                  </Grid>
+                  <Grid container sx={{ p: 2 }}>
+                  <Grid item md={6} container justifyContent="center" sx={{ mb: 2 }}>
+                  {genders.map((genderOption) => (
+                    <Chip
+                      key={genderOption.value}
+                      label={genderOption.label}
+                      color={gender === genderOption.value ? 'primary' : 'default'}
+                      onClick={() => handleGenderChange(genderOption.value)}
+                      sx={{ m: 1 }}
+                    />
+                  ))}
+                </Grid>
+                      <Grid item md={6} container justifyContent="center" sx={{ mb: 2 }}>
+                      {[1, 2, 3, 4, 5, 6].map((value) => (
+                        <Chip
+                          key={value}
+                          label={String(value)}
+                          color={number === String(value) ? 'primary' : 'default'}
+                          onClick={() => handleNumberChange(String(value))}
+                          sx={{ m: 1 }}
+                        />
+                      ))}
+                    </Grid>
+                  </Grid>
+                  <Grid container justifyContent="center">
+                    <Grid item xs={10}  sm={4} md={4} sx={{ p: 2}}>
+                      <FormControl fullWidth
+                      >
+                        <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+                        <Select
+                          labelId="demo-multiple-name-label"
+                          id="demo-multiple-name"
+                          value={usage}
+                          onChange={handleChange}
+                          input={<OutlinedInput label="Name" />}
+                          MenuProps={MenuProps}
+                        >
+                          {Object.keys(namesSelect).map((name) => (
+                            <MenuItem 
+                              key={name}
+                              value={name}
+                            >
+                              {namesSelect[name]}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                  <Grid item sx={{ p: 3 }}>
+                    <Button variant="outlined" onClick={handleSearchClick} disabled={isSearchDisabled}>Pesquisar</Button>
+                  </Grid>
+                  <Grid item sx={{ p: 3, textAlign: 'center'  }}>
+                  {data && data?.names && data?.names.length > 0 ?(
+                        data?.names.map((name) => (
+                            <div key={name} className="magic-name">
+                              <span >{name}</span>
+                            </div>
+                        ))
+                  ):
+                  <span>Data not found</span>
+                  }
+                  </Grid>
+              </Grid>
+      
 
       );
 }
