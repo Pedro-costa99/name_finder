@@ -1,3 +1,8 @@
+* {
+  font-family: CentraNube,system-ui,BlinkMacSystemFont,Helvetica Neue,arial,sans-serif;
+}  
+  
+  
   .magic-name {
     padding: 5px;
     display: inline-block;

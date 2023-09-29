@@ -91,7 +91,7 @@ const Home = () => {
       }}
     >
       <Grid sx={{ p: 2, textAlign: 'center' }}>
-        <h1>Encontre o nome perfeito para seu bebê...</h1>
+        <h1 style={{ color: '#333333' }}>Encontre o nome perfeito para seu bebê...</h1>
       </Grid>
       <Grid container sx={{ p: 2 }}>
         <Grid item md={6} container justifyContent="center" sx={{ mb: 2 }}>
@@ -99,9 +99,9 @@ const Home = () => {
             <Chip
               key={genderOption.value}
               label={genderOption.label}
-              color={gender === genderOption.value ? 'primary' : 'default'}
+              color={gender === genderOption.value ? 'secondary' : 'default'}
               onClick={() => handleGenderChange(genderOption.value)}
-              sx={{ m: 1 }}
+              sx={{ m: 1, p: 2, fontSize: '20px'}}
             />
           ))}
         </Grid>
@@ -110,9 +110,9 @@ const Home = () => {
             <Chip
               key={value}
               label={String(value)}
-              color={number === String(value) ? 'primary' : 'default'}
+              color={number === String(value) ? 'secondary' : 'default'}
               onClick={() => handleNumberChange(String(value))}
-              sx={{ m: 1 }}
+              sx={{ m: 1, p: 2, fontSize: '20px'  }}
             />
           ))}
         </Grid>
