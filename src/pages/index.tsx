@@ -20,7 +20,7 @@ interface DataItem {
   names: string[];
 }
 
-const Home = () => {
+const FindName = () => {
   const svgString = renderToString(<SVGBackground />);
   const [usage, setUsage] = useState<string>('');
   const [data, setData] = useState<DataItem | null>(null);
@@ -189,4 +189,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default FindName
