@@ -16,10 +16,10 @@
 ## ✔️ Deploy no Heroku
 - **https://find-name-9e0fe4fa03dc.herokuapp.com/**
 
-# Mensagens inspiradoras - mobile
+# Projeto Find Name - mobile
 ![Mensagens inspiradoras na tela de um celular](https://github.com/Pedro-costa99/name_finder/blob/main/src/assets/images/projeto-screencapture-localhost-mobile-iphone-xr.png)
 
-# Mensagens inspiradoras - PC
+# Projeto Find Name - PC
 ![Mensagens inspiradoras na tela de um computador](https://github.com/Pedro-costa99/name_finder/blob/main/src/assets/images/projeto-screencapture-desktop-1366x768.png)
 
 
