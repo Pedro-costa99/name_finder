@@ -1,3 +1,30 @@
+# ❤️ Projeto Find Name
+- Este é o Frontend que consome a API de nomes da Behind the name
+- Projeto ReactJS em produção
+  
+# ❤️ API consumida:
+- https://www.behindthename.com/api/help.php
+
+
+# ❤️ Algumas Tecnologias utilizadas
+- ReactJs, nodejs
+- Html5, Css3, Material-UI
+
+## ❤️ Autor
+- **Pedro Canabrava**
+
+## ✔️ Deploy no Heroku
+- **https://find-name-9e0fe4fa03dc.herokuapp.com/**
+
+# Mensagens inspiradoras - mobile
+![Mensagens inspiradoras na tela de um celular](https://github.com/Pedro-costa99/projeto-wiser-educacao-frontend/blob/main/src/assets/imagens/projeto-screencapture-localhost-mobile-iphone-xr.png)
+
+# Mensagens inspiradoras - PC
+![Mensagens inspiradoras na tela de um computador](https://github.com/Pedro-costa99/projeto-wiser-educacao-frontend/blob/main/src/assets/imagens/projeto-screencapture-desktop-1366x768.png)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -71,8 +98,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### `npm install @mui/material @emotion/react @emotion/styled`
 
-https://www.behindthename.com/api/help.php
-
-https://mui.com/material-ui/
-
-https://br.pinterest.com/
