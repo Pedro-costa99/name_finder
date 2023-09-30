@@ -1,37 +1,42 @@
 * {
-  font-family: CentraNube,system-ui,BlinkMacSystemFont,Helvetica Neue,arial,sans-serif;
-}  
-  
-  
-  .magic-name {
-    padding: 5px;
-    display: inline-block;
-    position: relative;
-    font-size: 24px;
-    animation: magic-ray 2s linear infinite;
-  }
-  
-  
-  .magic-name::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px; 
-    height: 20px; 
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    animation: magic-ray 1s linear infinite; 
-  }
-  
+  font-family: CentraNube, system-ui, BlinkMacSystemFont, Helvetica Neue, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  @keyframes magic-ray {
-    0% {
-      text-shadow: 0 0 5px #AEEEEE, 0 0 10px #AEEEEE, 0 0 15px #AEEEEE, 0 0 20px #AEEEEE, 0 0 25px #AEEEEE, 0 0 30px #AEEEEE;
-    }
-    100% {
-      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F4F4F4;
+  min-height: 100vh;
+}
+
+.magic-name {
+  padding: 5px;
+  display: inline-block;
+  position: relative;
+  font-size: 24px;
+  animation: magic-ray 2s linear infinite;
+}
+
+.magic-name::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: magic-ray 1s linear infinite;
+}
+
+@keyframes magic-ray {
+  0% {
+    text-shadow: 0 0 5px #AEEEEE, 0 0 10px #AEEEEE, 0 0 15px #AEEEEE, 0 0 20px #AEEEEE, 0 0 25px #AEEEEE, 0 0 30px #AEEEEE;
   }
-  
+  100% {
+    text-shadow: 0 0 10px #8400ff, 0 0 20px #8400ff, 0 0 30px #8400ff, 0 0 40px #8400ff, 0 0 50px #8400ff, 0 0 60px #8400ff;
+  }
+}

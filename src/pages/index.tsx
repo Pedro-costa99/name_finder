@@ -11,6 +11,7 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import './styles.css';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import SVGBackground from './SVGBackground.tsx';
 import { renderToString } from 'react-dom/server';
 
@@ -22,8 +23,8 @@ const Home = () => {
   const svgString = renderToString(<SVGBackground />);
   const [usage, setUsage] = useState<string>('');
   const [data, setData] = useState<DataItem | null>(null);
-  const [gender, setGender] = useState('');
-  const [number, setNumber] = useState('');
+  const [gender, setGender] = useState('F');
+  const [number, setNumber] = useState('1');
   const key = 'pe839753942';
 
   const namesSelect = {
@@ -74,7 +75,7 @@ const Home = () => {
     { label: 'Male', value: 'M' },
   ];
 
-  const isSearchDisabled = !(gender && number);
+  const isSearchDisabled = !usage;
 
   return (
     <Grid
@@ -90,31 +91,53 @@ const Home = () => {
         backgroundPosition: 'center',
       }}
     >
-      <Grid sx={{ p: 2, textAlign: 'center' }}>
+      <Grid sx={{ p: 2, pt: 5, textAlign: 'center' }}>
         <h1 style={{ color: '#333333' }}>Encontre o nome perfeito para seu bebê...</h1>
       </Grid>
       <Grid container sx={{ p: 2 }}>
         <Grid item md={6} container justifyContent="center" sx={{ mb: 2 }}>
-          {genders.map((genderOption) => (
-            <Chip
-              key={genderOption.value}
-              label={genderOption.label}
-              color={gender === genderOption.value ? 'secondary' : 'default'}
-              onClick={() => handleGenderChange(genderOption.value)}
-              sx={{ m: 1, p: 2, fontSize: '20px'}}
-            />
-          ))}
+          {genders.map((genderOption) => {
+            const isOptionSelected = gender === genderOption.value;
+            return (
+              <Chip
+                key={genderOption.value}
+                label={genderOption.label}
+                color={isOptionSelected ? 'secondary' : 'default'}
+                variant="outlined"
+                onClick={() => handleGenderChange(genderOption.value)}
+                sx={{
+                  m: 1,
+                  p: 2,
+                  fontSize: '20px',
+                  borderColor: 'gray',
+                  backgroundColor: isOptionSelected ? 'gray' : '',
+                  color: isOptionSelected ? 'white' : '',
+                }}
+              />
+            );
+          })}
         </Grid>
         <Grid item md={6} container justifyContent="center" sx={{ mb: 2 }}>
-          {[1, 2, 3, 4, 5, 6].map((value) => (
-            <Chip
-              key={value}
-              label={String(value)}
-              color={number === String(value) ? 'secondary' : 'default'}
-              onClick={() => handleNumberChange(String(value))}
-              sx={{ m: 1, p: 2, fontSize: '20px'  }}
-            />
-          ))}
+          {[1, 2, 3, 4, 5, 6].map((value) => {
+            const isValueSelected = number === String(value);
+            return (
+              <Chip
+                key={value}
+                label={String(value)}
+                color={isValueSelected ? 'secondary' : 'default'}
+                variant="outlined"
+                onClick={() => handleNumberChange(String(value))}
+                sx={{
+                  m: 1,
+                  p: 2,
+                  fontSize: '20px',
+                  borderColor: 'gray',
+                  backgroundColor: isValueSelected ? 'gray' : '',
+                  color: isValueSelected ? 'white' : '',
+                }}
+              />
+            );
+          })}
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
@@ -139,15 +162,21 @@ const Home = () => {
         </Grid>
       </Grid>
       <Grid item sx={{ p: 3 }}>
-        <Button variant="outlined" onClick={handleSearchClick} disabled={isSearchDisabled}>
-          Pesquisar
+        <Button
+          sx={{ borderColor: 'gray', color: 'gray' }}
+          variant="outlined"
+          onClick={handleSearchClick}
+          disabled={isSearchDisabled}
+        >
+          <AutoAwesomeIcon /> Search
         </Button>
       </Grid>
       <Grid item sx={{ p: 3, textAlign: 'center' }}>
         {data && data?.names && data?.names.length > 0 ? (
-          data?.names.map((name) => (
+          data?.names.map((name, index) => (
             <div key={name} className="magic-name">
               <span>{name}</span>
+              {index < data.names.length - 1 && ' |'}
             </div>
           ))
         ) : (
