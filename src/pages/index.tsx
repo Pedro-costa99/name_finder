@@ -14,6 +14,7 @@ import './styles.css';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import SVGBackground from './SVGBackground.tsx';
 import { renderToString } from 'react-dom/server';
+import fetchData from '../api/api'
 
 interface DataItem {
   names: string[];
@@ -25,7 +26,6 @@ const Home = () => {
   const [data, setData] = useState<DataItem | null>(null);
   const [gender, setGender] = useState('F');
   const [number, setNumber] = useState('1');
-  const key = 'pe839753942';
 
   const namesSelect = {
     eng: 'Inglês',
@@ -36,11 +36,13 @@ const Home = () => {
     spa: 'Espanhol',
   };
 
-  const handleSearchClick = () => {
-    fetch(`https://www.behindthename.com/api/random.json?number=${number}&usage=${usage}&gender=${gender}&key=${key}`)
-      .then((response) => response.json())
-      .then((jsonData) => setData(jsonData))
-      .catch((error) => console.log(error));
+  const handleSearchClick = async () => {
+    try {
+      const jsonData = await fetchData(number, usage, gender);
+      setData(jsonData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleGenderChange = (value: string) => {
